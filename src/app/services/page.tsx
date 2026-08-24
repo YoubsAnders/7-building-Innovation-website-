@@ -1,0 +1,15 @@
+import { ArrowUpRight } from "lucide-react";
+import { SiteFooter } from "@/components/layout/site-footer";
+import { SiteHeader } from "@/components/layout/site-header";
+import { ServiceCard } from "@/components/services/service-card";
+import { Breadcrumbs } from "@/components/ui/breadcrumbs";
+import { Container } from "@/components/ui/container";
+import { LinkButton } from "@/components/ui/link-button";
+import { getServicesByFamily, qhseCapability, serviceFamilies } from "@/data/services";
+import { createPageMetadata } from "@/lib/page-metadata";
+
+export const metadata = createPageMetadata({ title: "Services d’ingénierie et construction", description: "Découvrez les services d’études, ingénierie, construction, expertise et accompagnement proposés par 7 Building Innovation.", path: "/services" });
+
+export default function ServicesPage() {
+  return <><SiteHeader /><main><section className="bg-mist py-12 sm:py-16"><Container><Breadcrumbs items={[{ label: "Accueil", href: "/" }, { label: "Services" }]} /><div className="mt-10 max-w-4xl"><p className="text-sm font-semibold tracking-[0.15em] text-orange uppercase">Services</p><h1 className="mt-4 text-4xl font-semibold tracking-[-0.055em] text-navy sm:text-5xl">Des expertises organisées pour accompagner chaque étape du projet.</h1><p className="mt-6 max-w-2xl text-lg leading-8 text-slate">De la conception à la réalisation, 7 Building Innovation mobilise des compétences complémentaires pour étudier, construire, expertiser et accompagner les ouvrages.</p></div></Container></section><section className="bg-surface py-[var(--space-section)]"><Container className="space-y-16">{serviceFamilies.map((family, index) => { const familyServices = getServicesByFamily(family.id); return <section key={family.id} className="grid gap-7 border-t border-brand-border pt-7 lg:grid-cols-[0.31fr_1fr]"><div><span className="font-mono text-sm text-brand">{String(index + 1).padStart(2, "0")}</span><h2 className="mt-4 text-2xl font-semibold tracking-[-0.035em] text-foreground">{family.label}</h2><p className="mt-3 text-sm leading-6 text-muted">{family.description}</p>{family.id === "environment" ? <p className="mt-5 text-xs font-semibold tracking-[0.12em] text-brand uppercase">Compétence associée : {qhseCapability}</p> : null}</div><div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">{familyServices.map((service) => <ServiceCard key={service.id} service={service} />)}</div></section>; })}</Container></section><section className="bg-navy py-14 text-surface"><Container className="flex flex-col justify-between gap-7 sm:flex-row sm:items-center"><div><h2 className="text-2xl font-semibold tracking-[-0.035em]">Un besoin technique à préciser ?</h2><p className="mt-2 text-sm leading-6 text-white/70">Nos coordonnées sont disponibles pour préparer les prochaines étapes.</p></div><LinkButton href="/#contact" className="w-fit">Nous contacter <ArrowUpRight aria-hidden="true" className="ml-2 size-4" /></LinkButton></Container></section></main><SiteFooter /></>;
+}

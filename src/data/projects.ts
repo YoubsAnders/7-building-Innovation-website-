@@ -22,9 +22,19 @@ export type Project = {
 
 // Aucune réalisation n’est publiée avant validation de son contenu, de ses visuels et de son autorisation de publication.
 export const projects: Project[] = [];
+export type IndexableProject = Project & { description: string; coverImage: ProjectImage };
+
+// One publication gate for cards, detailed pages, static parameters and sitemap.
+export function isProjectIndexable(project: Project): project is IndexableProject {
+  const image = project.coverImage;
+  return project.published && /^[a-z0-9]+(?:-[a-z0-9]+)*$/.test(project.slug)
+    && Boolean(project.title.trim() && project.category.trim() && project.description?.trim())
+    && Boolean(image?.src.trim() && image.alt.trim()
+      && Number.isInteger(image.width) && image.width > 0
+      && Number.isInteger(image.height) && image.height > 0);
+}
 export const publishedProjects = projects.filter((project) => project.published);
-export const displayableProjects = publishedProjects.filter((project) => project.coverImage);
+export const displayableProjects = projects.filter(isProjectIndexable);
 export const featuredProjects = displayableProjects.filter((project) => project.featured);
 export const projectCategories = [...new Set(displayableProjects.map((project) => project.category))];
-export function isProjectIndexable(project: Project) { return project.published && Boolean(project.slug && project.title && project.description && project.coverImage); }
 export function getProjectBySlug(slug: string) { return projects.find((project) => project.slug === slug); }

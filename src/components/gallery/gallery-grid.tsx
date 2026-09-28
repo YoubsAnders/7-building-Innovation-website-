@@ -34,7 +34,7 @@ export function GalleryGrid({ items, categories }: GalleryGridProps) {
       {activeDescription ? <p className="mt-5 max-w-2xl text-sm leading-6 text-muted">{activeDescription}</p> : null}
       <p aria-live="polite" className="sr-only">{visibleItems.length} visuel{visibleItems.length > 1 ? "s" : ""} affiché{visibleItems.length > 1 ? "s" : ""}.</p>
       <div className="mt-10 grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {visibleItems.map((item) => <GalleryFigure key={item.id} item={item} sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw" />)}
+        {visibleItems.map((item, index) => <GalleryFigure key={item.id} item={item} preload={activeFilter === "all" && index === 0} sizes="(max-width: 639px) 100vw, (max-width: 1023px) 50vw, 33vw" />)}
       </div>
     </>
   );

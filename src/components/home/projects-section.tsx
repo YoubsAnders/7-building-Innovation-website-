@@ -14,13 +14,13 @@ export function ProjectsSection() {
   const hasGallery = Boolean(lead);
 
   return (
-    <section id="projets" className="scroll-mt-24 bg-brand-soft py-[var(--space-section)]">
+    <section id="projets" className="scroll-mt-24 bg-surface py-[var(--space-section)]">
       <Container>
         <div className="flex flex-col justify-between gap-6 lg:flex-row lg:items-end">
           <SectionHeading
             eyebrow="Projets"
-            title={featuredProjects.length || hasGallery ? "Quelques réalisations" : "Des réalisations à découvrir prochainement."}
-            description={featuredProjects.length || hasGallery ? "Chantiers suivis, interventions techniques et visualisations de conception réalisés par 7 Building Innovation." : "Cette section est prête à accueillir les futures réalisations validées de 7 Building Innovation."}
+            title={featuredProjects.length ? "Des projets à découvrir." : hasGallery ? "Sur le terrain, en conception." : "Des réalisations à découvrir prochainement."}
+            description={featuredProjects.length || hasGallery ? "Une sélection de chantiers, d’interventions techniques et de rendus de conception." : "Cette section est prête à accueillir les futures réalisations validées de 7 Building Innovation."}
           />
           {featuredProjects.length || hasGallery ? <LinkButton href="/projets" variant="secondary" className="w-fit shrink-0">Voir la galerie <ArrowUpRight aria-hidden="true" className="ml-2 size-4" /></LinkButton> : null}
         </div>
@@ -55,11 +55,11 @@ export function ProjectsSection() {
             <p className="mt-8 max-w-2xl border-l-2 border-brand-border pl-5 text-sm leading-6 text-muted">Les visuels identifiés comme rendus de conception sont des projections architecturales, et non des ouvrages livrés.</p>
           </>
         ) : (
-          <div className="technical-grid mt-12 flex min-h-72 items-center justify-center border border-dashed border-navy/25 p-8 text-center">
+          <div className="technical-grid mt-12 flex min-h-72 items-center justify-center border border-dashed border-brand-deep/25 p-8 text-center">
             <div className="max-w-sm bg-surface p-6">
-              <FolderOpen aria-hidden="true" className="mx-auto size-7 text-orange" />
-              <p className="mt-5 text-lg font-semibold tracking-[-0.02em] text-navy">Nos réalisations seront prochainement présentées ici.</p>
-              <p className="mt-3 text-sm leading-6 text-slate">Aucun projet n’est affiché tant que les informations associées ne sont pas validées.</p>
+              <FolderOpen aria-hidden="true" className="mx-auto size-7 text-brand" />
+              <p className="mt-5 text-lg font-semibold tracking-[-0.02em] text-brand-deep">Nos réalisations seront prochainement présentées ici.</p>
+              <p className="mt-3 text-sm leading-6 text-muted">Aucun projet n’est affiché tant que les informations associées ne sont pas validées.</p>
             </div>
           </div>
         )}

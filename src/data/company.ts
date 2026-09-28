@@ -55,12 +55,12 @@ export const internalNavigation = [
   { label: "Accueil", href: "/" }, { label: "À propos", href: "/a-propos" },
   { label: "Services", href: "/services" }, { label: "Projets", href: "/projets" },
   { label: "Expertise", href: "/expertise" }, { label: "Équipe", href: "/equipe" },
-  { label: "Permis de bâtir", href: "/permis-de-batir" }, { label: "Contact", href: "/#contact" },
+  { label: "Permis de bâtir", href: "/permis-de-batir" }, { label: "Contact", href: "/contact" },
 ] as const;
 
 export function getCompanyExperienceYears(currentYear = new Date().getFullYear()) {
   const startYear = company.experienceStartYear;
-  if (startYear === null || startYear > currentYear) return null;
+  if (startYear === null || !Number.isInteger(startYear) || startYear < 1 || !Number.isInteger(currentYear) || startYear > currentYear) return null;
   return currentYear - startYear;
 }
 
